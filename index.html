@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,,maximum-scale=1,user-scalable=no">
+    <title>信用卡积分商城</title>
+    <script src="./vue.js"></script>
+    <script src="./style.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header class="header">
+            <h3>我的订单</h3>
+        </header>
+        <main class="content">
+            <div class="content-nav">
+                <div class="nav-item" v-for="(name,index) in arr" :key="index" @click="btnClick(index)" :class="{'nav-item-color':currentIndex === index}">
+                    {{name}}</div>
+            </div>
+            <div class="content-goods">
+                <div class="item" v-for="(item,index2) in list" :key="index2">
+                    <div>
+                        <img :src='item.src'>
+                        <span id="text">
+                            <p>{{item.text[0]}}</p>
+                            <p class="pcolor">{{item.text[1]}}</p>
+                        </span>
+                    </div>
+                    <div id="second" :class="item.color">{{item.status}}</div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer"></footer>
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .header h3 {
+        height: 1.2rem;
+        text-align: center;
+        line-height: 1.2rem;
+        font-size: 0.3rem;
+    }
+    
+    .content-nav {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.2rem;
+    }
+    
+    .nav-item {
+        padding: 0 0.2rem 0.2rem;
+        border-bottom: 0.02rem solid #ffffff;
+    }
+    
+    .nav-item-color {
+        border-color: rgb(49, 49, 240);
+    }
+    
+    .content {
+        padding-bottom: 0.2rem;
+    }
+    
+    .content .content-goods {
+        background-color: rgb(238, 240, 240);
+        padding: 0.2rem 0.2rem;
+    }
+    
+    .content .content-goods .item {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        box-sizing: border-box;
+        background: #FFFFFF;
+        border-radius: 0.16rem;
+        border: 0.01rem solid rgba(0, 0, 0, 0.1);
+        padding: 0.24rem;
+        margin: 0.1rem 0;
+    }
+    
+    .content .content-goods .item div:first-child {
+        display: inline-flex;
+    }
+    
+    .content .content-goods .item div img {
+        width: 1.5rem;
+        height: 1.2rem;
+    }
+    
+    .content .content-goods .item #second {
+        padding: 0.05rem 0.05rem;
+        border-radius: 0.03rem;
+        font-size: 0.2rem;
+        text-align: center;
+    }
+    /* 待付款 */
+    
+    .statusColor1 {
+        background: #f8e4e4;
+        color: #e57979;
+        border: 0.01rem solid #e57979;
+    }
+    /* 已完成 */
+    
+    .statusColor2 {
+        background: #ebf8e4;
+        color: #90e579;
+        border: 0.01rem solid #90e579;
+    }
+    /* 待发货 */
+    
+    .statusColor3 {
+        background: #d1d0d0;
+        color: #686565;
+        border: 0.01rem solid #686565;
+    }
+    /* 售后中 */
+    
+    .statusColor4 {
+        background: #f4f8e4;
+        color: #f0b733;
+        border: 0.01rem solid #f0b733;
+    }
+    
+    #text {
+        margin: auto;
+        font-size: 0.25rem;
+        padding-left: 0.2rem;
+    }
+    
+    #text p {
+        margin-bottom: 0.05rem;
+    }
+    
+    #text .pcolor {
+        color: rgb(77, 77, 203);
+    }
+</style>
+<script>
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+        el: '#app ',
+        data: {
+            currentIndex: 0,
+            arr: ['全部', '待付款', '待发货', '已完成', '退款/售后'],
+            list: [{
+                src: "./assets/商品/单品-图片1.png",
+                text: ['Galaxy Z系列 5折券 ', '50积分 '],
+                status: '待付款 ',
+                color: 'statusColor1'
+            }, {
+                src: "./assets/商品/单品-图片2.png",
+                text: ['Galaxy Note20系列手机 ', '50积分 '],
+                status: '已完成 ',
+                color: 'statusColor2'
+            }, {
+                src: "./assets/商品/单品-图片1.png",
+                text: ['Galaxy Z系列 5折券 ', '50积分 '],
+                status: '待发货 ',
+                color: 'statusColor3'
+            }, {
+                src: "./assets/商品/单品-图片2.png",
+                text: ['Galaxy Note20系列手机 ', '50积分 '],
+                status: '售后中 ',
+                color: 'statusColor4'
+            }, {
+                src: "./assets/商品/单品-图片2.png",
+                text: ['Galaxy Note20系列手机 ', '50积分 '],
+                status: '待发货 ',
+                color: 'statusColor3'
+            }, {
+                src: "./assets/商品/单品-图片2.png",
+                text: ['Galaxy Note20系列手机 ', '50积分 '],
+                status: '待发货 ',
+                color: 'statusColor3'
+            }, {
+                src: "./assets/商品/单品-图片2.png",
+                text: ['Galaxy Note20系列手机 ', '50积分 '],
+                status: '待发货 ',
+                color: 'statusColor3'
+            }, ]
+        },
+        computed: {},
+        methods: {
+            btnClick(index) {
+                this.currentIndex = index
+            }
+        }
+    });
+</script>
+
+</html>
